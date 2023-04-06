@@ -1,0 +1,31 @@
+.profile-img > img{
+    width: 392px;
+    height: 450px;
+}
+.otherDetail > input{
+    width: 400px;
+    height: 44px;
+    font-size: larger;
+}
+.otherDetail > label{
+    font-size: xx-large;
+}
+
+.com_Detail > input{
+    width: 400px;
+    height: 44px;
+    font-size: larger;
+}
+.com_Detail > label{
+    font-size: xx-large;
+}
+
+.emp , .com {
+    display: flex;
+}
+.profile-img{
+    margin: 20px;
+}
+.otherDetail , .com_Detail{
+    padding-left: 300px;
+}

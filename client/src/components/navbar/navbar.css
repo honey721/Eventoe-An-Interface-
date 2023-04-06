@@ -1,0 +1,29 @@
+.navbar{
+    height: 70px;
+    background-color: #003580;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .navContainer{
+    width: 100%;
+    margin: 20px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+  }
+  .navContainer > ul{
+    display: flex;
+    width: 31%;
+    justify-content: space-evenly;
+    font-size: larger;
+    list-style-type: none;
+  }
+  
+  .logo{
+    font-weight: 500;
+    font-size: xx-large;
+    margin-right: 15px;
+  }
+  
