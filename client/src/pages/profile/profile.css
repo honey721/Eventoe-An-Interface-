@@ -29,3 +29,39 @@
 .otherDetail , .com_Detail{
     padding-left: 300px;
 }
+
+.com , .emp{
+    margin: 40px;
+    flex-direction: column;
+}
+
+#profile {
+    padding: 0px 0px 15px 10px;
+    font-size: xxx-large;
+}
+
+#comform > label{
+    display: inline-block;
+    
+    font-size: x-large;
+    width: 300px;
+}
+
+#comform > input{
+    margin-left: 130px;
+    width: 350px;
+    height: 30px;
+    font-size: larger;
+}
+
+/* footer{
+    height: 80px;
+    background-color: #003580;
+} */
+
+
+
+#profileSpan2 {
+    font-size: larger;
+    padding: 0px 0px 15px 10px;
+}

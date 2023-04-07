@@ -13,17 +13,45 @@
     align-items: center;
     justify-content: left;
   }
-  .navContainer > ul{
+  .navContainer > .homeul{
     display: flex;
-    width: 31%;
-    justify-content: space-evenly;
     font-size: larger;
     list-style-type: none;
+    justify-content: space-evenly;
+    width: 991px;
+    height: 100%;
+    font-family: system-ui;
   }
   
   .logo{
     font-weight: 500;
     font-size: xx-large;
-    margin-right: 15px;
+    margin-right: 80px;
+  }
+
+  .profileul{
+    width: inherit;
+    display: flex;
+    justify-content: end;
+    list-style: none;
+    font-size: larger;
+    justify-content: flex-start;
+    margin-left: 140px;
+    height: 100%;
+  }
+
+  .logout > #logoutbtn{
+    background-color: red;
+    padding: 3px 6px 3px 6px;
+    border-radius: 8px;
+    font-size: large;
+    list-style-type: none;
+    height: 78%;
   }
   
+  .logout{
+    width: inherit;
+    display: flex;
+    justify-content: end;
+    height: 100%;
+  }

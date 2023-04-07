@@ -82,9 +82,9 @@ function Home() {
 
   return (
     <div>
-      <Navbar page={page} name={location.state.userValue} />
+      <Navbar page={page} name={location.state.userValue} userDetail={data}/>
       <div className="container">
-        <div className="sec1">
+        <div className="sec1"> 
           {/* <div className="profile-pic">
             <img src="https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
           </div> */}
@@ -107,7 +107,7 @@ function Home() {
           </div>
           <div className="Articles">
             {articles.map(article => (
-
+                
 
               <div className="article">
                 <div className="upper">
@@ -124,14 +124,14 @@ function Home() {
                   </div>
                   <div className="avail_work">
                     <h3>Available Jobs :
-                      <select onChange={handleChange}>
+                      <select value={articleName} onChange={handleChange}>
                         <option value="">Choose jobs</option>
                         {article.jobs.map( option => (
                           <option value={option.workName}>{option.workName}</option>
                         ))}
                       </select></h3>
                     {toggle && article.jobs.map(job => (
-                        job.workName === articleName &&
+                        job.workName === articleName && 
                         <div className="aboutJob">
                         <div className="days">
                           <label htmlFor="">For Days</label>

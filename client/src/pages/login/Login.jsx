@@ -6,7 +6,7 @@ import "./login.css"
 function Login() {
 
     var [userValue, setUserValue] = useState("");
-    
+
     const navigate = useNavigate();
     var formData = {}
 
@@ -14,47 +14,47 @@ function Login() {
         setUserValue(e.target.value);
     }
 
-    console.log("uservalue : ",userValue)
+    console.log("uservalue : ", userValue)
 
     async function getFormData(e) {
         var flag = true;
         e.preventDefault();
-        console.log("in the function ",userValue,flag)
-        
+        console.log("in the function ", userValue, flag)
+
         if (userValue === "Employee") {
-            
+
             await fetch("/auth/logemp", {
                 method: "POST",
                 headers: new Headers({
                     'Content-Type': 'application/json; charset=UTF-8',
                     'Accept': 'application/json'
-                  }),
+                }),
                 body: JSON.stringify({
                     "email": e.target.email.value,
                     "password": e.target.password.value
                 })
             }).then(result => {
                 // console.log("result : " ,result)
-                
+
                 if (result.status != 200) {
                     alert("email or password not correct!")
                     flag = false;
                     console.log(flag)
                 }
                 return result.json();
-              
+
             }).then(res => {
                 // console.log("my res : ",res)
-                if(flag === true){
+                if (flag === true) {
                     alert("Logged In Successfully!")
-                  
+
                     navigate('/home', {
                         state: {
-                           formData : res , userValue
+                            formData: res, userValue
                         }
                     });
                 }
-                
+
 
             })
         }
@@ -64,33 +64,33 @@ function Login() {
                 headers: new Headers({
                     'Content-Type': 'application/json; charset=UTF-8',
                     'Accept': 'application/json'
-                  }),
+                }),
                 body: JSON.stringify({
                     "email": e.target.email.value,
                     "password": e.target.password.value
                 })
             }).then(result => {
                 // console.log("result : " ,result)
-                
+
                 if (result.status != 200) {
                     alert("email or password not correct!")
                     flag = false;
                     console.log(flag)
                 }
                 return result.json();
-              
+
             }).then(res => {
                 // console.log("my res : ",res)
-                if(flag === true){
+                if (flag === true) {
                     alert("Logged In Successfully!")
-                  
+
                     navigate('/home', {
                         state: {
-                           formData : res , userValue
+                            formData: res, userValue
                         }
                     });
                 }
-                
+
 
             })
         }
@@ -115,9 +115,9 @@ function Login() {
                         <option value="Company">Company</option>
                     </select><br /><br />
                     <label htmlFor="" className='form-ele'>Email Id</label><br /><br />
-                    <input type="email" name="email" className='login-input' required/><br /><br />
+                    <input type="email" name="email" className='login-input' required /><br /><br />
                     <label htmlFor="" className='form-ele'>Password</label><br /><br />
-                    <input type="password" name="password" className='login-input' required/><br /><br />
+                    <input type="password" name="password" className='login-input' required /><br /><br />
                     <button type="submit" id="submit-btn">Login</button><br /><br />
                     <a href="/signup">Don't have an account ?</a>
                 </form>

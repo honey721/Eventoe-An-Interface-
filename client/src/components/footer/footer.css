@@ -1,0 +1,14 @@
+.footer{
+    height: 80px;
+    background-color: #003580;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    
+}
+
+.copyright{
+    text-align: center;
+    font-size: medium;
+    margin-top: 40px;
+}

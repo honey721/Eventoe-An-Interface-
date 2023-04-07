@@ -1,56 +1,70 @@
 import React from 'react'
 import "./profile.css"
 import { useLocation } from 'react-router-dom'
-
+import Navbar from '../../components/navbar/Navbar';
+import Footer from '../../components/footer/Footer';
 
 function Profile() {
     var location = useLocation();
-
+    var userDetail = location.state.userDetail;
+    var userType = location.state.type;
+    console.log(userDetail)
     return (
         <div>
-            <h1>{location.state.type}</h1>
-            { location.state.type === "employee" && <div className="emp">
-                <div className="otherDetail">
-                    <label htmlFor="">Username</label><br/>
-                    <input type="text" name="" value="Honey Verma" id="" /><br/><br/>
+            <Navbar page={"profile"} />
+            {location.state.type === "Employee" && <div className="emp">
+                <span id='profile'>Hello! {userDetail.username}</span>
+                <span id='profileSpan2' >Below is your personal detail</span>
+                <hr />
+                <form action="" id='comform'>
+                    <br />
+                    <label htmlFor="">Username</label>
+                    <input type="text" name="" value={userDetail.username} id="" /><br /><br /><br /><br />
 
-                    <label htmlFor="">Age</label><br/>
-                    <input type="text" name="" value="22" id="" /><br/><br/>
+                    <label htmlFor="">Age</label>
+                    <input type="text" name="" value={userDetail.age} id="" /><br /><br /><br /><br />
 
-                    <label htmlFor="">Mobile No.</label><br/>
-                    <input type="text" name="" value="8076006891" id="" /><br/><br/>
+                    <label htmlFor="">Mobile No.</label>
+                    <input type="text" name="" value={userDetail.phone} id="" /><br /><br /><br /><br />
 
-                    <label htmlFor="">Address</label><br/>
-                    <input type="text" name="" value="Akshay enclave 1, govindpuram ghaziabad" id="" /><br/><br/>
+                    <label htmlFor="">Address</label>
+                    <input type="text" name="" value={userDetail.address} id="" /><br /><br /><br /><br />
 
-                    <label htmlFor="">Registered Email Id</label><br/>
-                    <input type="text" name="" value="honeysoni722001@gmail.com" id="" /><br/><br/>
-                
-                    <label htmlFor="">Gender</label><br/>
-                    <input type="text" name="" value="Male" id="" /><br/><br/>
-                </div>
+                    <label htmlFor="">Registered Email Id</label>
+                    <input type="text" name="" value={userDetail.email} id="" /><br /><br /><br /><br />
+
+                    <label htmlFor="">Gender</label>
+                    <input type="text" name="" value={userDetail.gender} id="" /><br /><br /><br /><br />
+                </form>
             </div>}
-            { location.state.type === "Company"  && <div className="com">
-                <div className="com_Detail">
-                    <label htmlFor="">Organization Name</label><br/>
-                    <input type="text" name="" value="L&T soft." id="" /><br/><br/>
+            {location.state.type === "Company" && <div className="com">
 
-                    <label htmlFor="">CIN No.</label><br/>
-                    <input type="text" name="" value="2243242342341324234" id="" /><br/><br/>
+                <span id='profile'>Hello! {userDetail.username}</span>
+                <span id='profileSpan2' >Below is your personal detail</span>
+                <hr />
+                <form action="" id='comform'>
+                    <br />
+                    <label htmlFor="">Organization Name</label>
+                    <input type="text" name="" value={userDetail.username} id="" /><br /><br /><br /><br />
 
-                    <label htmlFor="">Contact No.</label><br/>
-                    <input type="text" name="" value="8076006891" id="" /><br/><br/>
+                    <label htmlFor="">CIN No.</label>
+                    <input type="text" name="" value={userDetail.CIN_No} id="" /><br /><br /><br /><br />
 
-                    <label htmlFor="">Address</label><br/>
-                    <input type="text" name="" value="Akshay enclave 1, govindpuram ghaziabad" id="" /><br/><br/>
+                    <label htmlFor="">Contact No.</label>
+                    <input type="text" name="" value={userDetail.phone} id="" /><br /><br /><br /><br />
 
-                    <label htmlFor="">Registered Email Id</label><br/>
-                    <input type="text" name="" value="honeysoni722001@gmail.com" id="" /><br/><br/>
-                
-                    <label htmlFor="">Gender</label><br/>
-                    <input type="text" name="" value="Male" id="" /><br/><br/>
-                </div>
+                    <label htmlFor="">Address</label>
+                    <input type="text" name="" value={userDetail.address} id="" /><br /><br /><br /><br />
+
+                    <label htmlFor="">Registered Email Id</label>
+                    <input type="text" name="" value={userDetail.email} id="" /><br /><br /><br /><br />
+                </form>
             </div>}
+            {/* <footer>
+            </footer> */}
+            <Footer />
+            
+
         </div>
     )
 }
