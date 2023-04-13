@@ -40,6 +40,10 @@ const ComSchema = new mongoose.Schema(
             endDate:{
                 type:Date,
                 required:true 
+            },
+            amountPaid:{
+              type:String,
+              required:true
             }
 
         }

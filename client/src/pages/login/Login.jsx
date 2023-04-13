@@ -11,7 +11,7 @@ function Login() {
     var formData = {}
 
     function handleUser(e) {
-        setUserValue(e.target.value);
+        sessionStorage.setItem("userValue",e.target.value)
     }
 
     console.log("uservalue : ", userValue)
@@ -21,7 +21,7 @@ function Login() {
         e.preventDefault();
         console.log("in the function ", userValue, flag)
 
-        if (userValue === "Employee") {
+        if (sessionStorage.getItem("userValue") === "Employee") {
 
             await fetch("/auth/logemp", {
                 method: "POST",
@@ -44,21 +44,32 @@ function Login() {
                 return result.json();
 
             }).then(res => {
-                // console.log("my res : ",res)
+                console.log("my res : ", res)
                 if (flag === true) {
                     alert("Logged In Successfully!")
 
-                    navigate('/home', {
-                        state: {
-                            formData: res, userValue
-                        }
-                    });
+                    navigate('/home'
+                    // ,{
+                    //     state: {
+                    //         formData: res, 
+                    //         userValue
+                    //     }
+                    // }
+                    );
+
+                    sessionStorage.setItem("username", res.username)
+                    sessionStorage.setItem("age", res.age)
+                    sessionStorage.setItem("phone", res.phone)
+                    sessionStorage.setItem("address", res.address)
+                    sessionStorage.setItem("gender", res.gender)
+                    sessionStorage.setItem("email", res.email)
+                    sessionStorage.setItem("password", res.password)
                 }
 
 
             })
         }
-        else if (userValue === "Company") {
+        else if (sessionStorage.getItem("userValue") === "Company") {
             await fetch("/auth/logcom", {
                 method: "POST",
                 headers: new Headers({
@@ -80,15 +91,27 @@ function Login() {
                 return result.json();
 
             }).then(res => {
-                // console.log("my res : ",res)
+                console.log("my res : ",res)
                 if (flag === true) {
                     alert("Logged In Successfully!")
 
-                    navigate('/home', {
-                        state: {
-                            formData: res, userValue
-                        }
-                    });
+                    navigate('/home'
+                    // , {
+                    //     state: {
+                    //         formData: res,
+                    //          userValue
+                    //     }
+                    // }
+                    );
+
+                    sessionStorage.setItem("username", res.username)
+                    sessionStorage.setItem("phone", res.phone)
+                    sessionStorage.setItem("CIN_No", res.CIN_No)
+                    sessionStorage.setItem("desc", res.desc)
+                    sessionStorage.setItem("address", res.address)
+                    sessionStorage.setItem("work", JSON.stringify(res.work))
+                    sessionStorage.setItem("email", res.email)
+                    sessionStorage.setItem("password", res.password)
                 }
 
 

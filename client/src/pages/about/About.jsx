@@ -6,7 +6,7 @@ import './about.css'
 function About() {
   return (
     <div>
-      <Navbar page={"about"}/>
+      <Navbar/>
       <div className="description">
         <ul>
             <li>Eventoe is a website which is based on building an interface website for the company's which organize different types of events and unemployed youth. </li>
@@ -18,7 +18,6 @@ function About() {
         </ul>
 
       </div>
-      <Footer />
     </div>
   )
 }

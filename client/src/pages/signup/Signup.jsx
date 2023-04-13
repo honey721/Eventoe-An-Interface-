@@ -11,17 +11,24 @@ function Signup() {
   var [days, setDays] = useState(0);
   var [startDate, setstartDate] = useState();
   var [endDate, setendDate] = useState();
+  var [amountPaid, setAmountPaid] = useState(0);
+  var [inputWorkName, setInputWorkName] = useState("");
+
   var [workDetail, setWorkDetail] = useState([]);
 
   var [workValueList, setWorkValueList] = useState([]);
 
   var [selectedOption, setSelectedOption] = useState(false);
+  var [showInputBox, setShowInputBox] = useState(false);
+
   var [flag, setFlag] = useState(false);
   var [f1, setf1] = useState(false);
   var [f2, setf2] = useState(false);
   var [f3, setf3] = useState(false);
+  var [f4, setf4] = useState(false);
 
   const navigate = useNavigate();
+  
 
   var d = new Date();
   const page = "signup";
@@ -64,7 +71,39 @@ function Signup() {
     {
       label: "groomer",
       value: "groomer"
-    }
+    },
+    {
+      label: "planner",
+      value: "planner"
+    },
+    {
+      label: "caterers",
+      value: "caterers"
+    },
+    {
+      label: "light technician",
+      value: "light technician"
+    },
+    {
+      label: "choreographer",
+      value: "choreographer"
+    },
+    {
+      label: "video editor",
+      value: "video editor"
+    },
+    {
+      label: "video editor",
+      value: "video editor"
+    },
+    {
+      label: "accounting",
+      value: "accounting"
+    },
+    {
+      label: "other",
+      value: "other"
+    },
   ];
 
 
@@ -73,61 +112,94 @@ function Signup() {
   // }
 
   function handleChange(e) {
-    setUserValue(e.target.value);
+    // setUserValue(e.target.value);
+    sessionStorage.setItem("userValue",e.target.value)
   }
 
   useEffect(() => {
     setWorkValueList(workValueList => [...workValueList, "select work"]);
   }, [])
+
   function handleChangeWork(e) {
     var isExist = false;
-    for (var value of workValueList) {
-      if (value === e.target.value) {
-        isExist = true;
-      }
+    setWorkValue(e.target.value);
+
+
+    if (e.target.value === "select work") {
+      setSelectedOption(false);
+      setShowInputBox(false);
+      setInputWorkName("");
     }
-    if (isExist === false) {
-      setSelectedOption(true);
-      setWorkValue(e.target.value);
-      setWorkValueList(workValueList => [...workValueList, e.target.value]);
+    else if (e.target.value === "other") {
+      setShowInputBox(true);
     }
     else {
-      setWorkValue(e.target.value);
+      setShowInputBox(false);
+      setInputWorkName("");
+
+      for (var value of workValueList) {
+        if (value === e.target.value) {
+          isExist = true;
+        }
+      }
+      if (isExist === false) {
+        setSelectedOption(true);
+        // setWorkValue(e.target.value);
+        // setWorkValueList(workValueList => [...workValueList, e.target.value]);
+      }
+      else {
+        setSelectedOption(false);
+      }
     }
   }
 
   function saveJobData(e) {
     e.preventDefault();
-    console.log(startDate,endDate , typeof(startDate))
+    console.log(startDate, endDate, typeof (startDate))
+    var jobName;
+    jobName = workValue;
+    if (workValue === "other") {
+      jobName = inputWorkName;
 
-    if(startDate[8]+startDate[9] <= endDate[8]+endDate[9] && startDate[5]+startDate[6] <= endDate[5]+endDate[6])
-    {
-      setWorkDetail(workDetail => [...workDetail, { workName: workValue, days: days, startDate: startDate, endDate: endDate }])
-      setSelectedOption(false)
-      setFlag(false)
     }
-    else{
+
+
+    if (startDate[8] + startDate[9] <= endDate[8] + endDate[9] && startDate[5] + startDate[6] <= endDate[5] + endDate[6]) {
+      setWorkDetail(workDetail => [...workDetail, { workName: jobName, days: days, startDate: startDate, endDate: endDate, amountPaid: amountPaid }])
+      setSelectedOption(false)
+      if (workValue === "other") {
+        setInputWorkName("");
+        setShowInputBox(false);
+      }
+      setWorkValue("select work");
+      setFlag(false)
+      setWorkValueList(workValueList => [...workValueList, workValue]);
+    }
+    else {
       alert("please select valid Dates")
     }
 
 
-   
+
   }
 
 
   useEffect(() => {
-    console.log(flag, f1, f2, f3)
-    if (f1 === true && f2 === true && f3 === true) {
+    console.log(flag, f1, f2, f3, f4)
+    if (f1 === true && f2 === true && f3 === true && f4 === true) {
       setFlag(true)
-      console.log(flag, f1, f2, f3)
+      console.log(flag, f1, f2, f3, f4)
 
 
       setf1(false)
       setf2(false)
       setf3(false)
+      setf4(false)
     }
 
   });
+
+
 
 
   // if (works !== "" && message !== "") {
@@ -152,7 +224,7 @@ function Signup() {
     if (e.target.password.value != e.target.cPassword.value) {
       return alert("password are not same!")
     }
-    if (userValue === "Employee") {
+    if (sessionStorage.getItem("userValue") === "Employee") {
       await fetch("/auth/regemp", {
         method: "POST",
         headers: {
@@ -177,19 +249,27 @@ function Signup() {
           alert("Account Created Successfully!")
           navigate('/home', {
             state: {
-              formData: {
-                "username": e.target.name.value,
-                "age": e.target.age.value,
-                "phone": e.target.phone.value,
-                "address": e.target.address.value,
-                "gender": e.target.gender.options[e.target.gender.selectedIndex].text,
-                "email": e.target.email.value,
+              // formData: {
+              //   "username": e.target.name.value,
+              //   "age": e.target.age.value,
+              //   "phone": e.target.phone.value,
+              //   "address": e.target.address.value,
+              //   "gender": e.target.gender.options[e.target.gender.selectedIndex].text,
+              //   "email": e.target.email.value,
 
 
-                "password": e.target.password.value
-              }, userValue
+              //   "password": e.target.password.value
+              // }, 
+              userValue
             }
           });
+          sessionStorage.setItem("username",e.target.name.value)
+          sessionStorage.setItem("age",e.target.age.value)
+          sessionStorage.setItem("phone",e.target.phone.value)
+          sessionStorage.setItem("address",e.target.address.value)
+          sessionStorage.setItem("gender",e.target.gender.options[e.target.gender.selectedIndex].text)
+          sessionStorage.setItem("email",e.target.email.value)
+          sessionStorage.setItem("password",e.target.password.value)
         }
         return result.json();
       }).then(res => {
@@ -198,7 +278,7 @@ function Signup() {
     }
 
 
-    else if (userValue === "Company") {
+    else if (sessionStorage.getItem("userValue") === "Company") {
       await fetch("/auth/regcom", {
         method: "POST",
         headers: {
@@ -219,7 +299,7 @@ function Signup() {
       }).then(async result => {
         console.log("result : ", result);
         if (result.status != 200) {
-          alert("some field already exist!")
+          alert("some field already exist/Invalid CIN No.")
         }
         else {
 
@@ -256,19 +336,29 @@ function Signup() {
 
           navigate('/home', {
             state: {
-              formData: {
-                "username": e.target.name.value,
-                "phone": e.target.phone.value,
-                "CIN_No": e.target.cin.value,
-                "desc": e.target.desc.value,
-                "address": e.target.address.value,
-                "work": workDetail,
-                "email": e.target.email.value,
-                "password": e.target.password.value,
+              // formData: {
+              //   "username": e.target.name.value,
+              //   "phone": e.target.phone.value,
+              //   "CIN_No": e.target.cin.value,
+              //   "desc": e.target.desc.value,
+              //   "address": e.target.address.value,
+              //   "work": workDetail,
+              //   "email": e.target.email.value,
+              //   "password": e.target.password.value,
 
-              }, userValue
+              // },
+               userValue
             }
           });
+
+          sessionStorage.setItem("username",e.target.name.value)
+          sessionStorage.setItem("phone",e.target.phone.value)
+          sessionStorage.setItem("CIN_No",e.target.cin.value)
+          sessionStorage.setItem("desc",e.target.desc.value)
+          sessionStorage.setItem("address",e.target.address.value)
+          sessionStorage.setItem("work",JSON.stringify(workDetail))
+          sessionStorage.setItem("email",e.target.email.value)
+          sessionStorage.setItem("password",e.target.password.value)
 
         }
 
@@ -284,7 +374,7 @@ function Signup() {
 
   return (
     <div>
-      <Navbar page={page} name={userValue} />
+      <Navbar/>
       <h1 id='signup-heading'>Eventoe Signup</h1>
       <br />
       <div className="signup-div">
@@ -357,6 +447,14 @@ function Signup() {
 
             {/* <input value={message} onChange={handleMessage} type="text" name="age" id="work-inp" placeholder='Enter here, if require work not in the list' /> */}
             <br /><br />
+            {showInputBox === true && <div className='inputWork'>
+              <label htmlFor="">Enter the job/work name </label>
+              <input type="text" name="" id="" value={inputWorkName} onChange={(e) => {
+                setInputWorkName(e.target.value);
+                setSelectedOption(true);
+              }} />
+            </div>
+            }
             {selectedOption === true && <div className="jobDetail">
               <form>
                 <label htmlFor="">For how many days : </label>
@@ -377,9 +475,16 @@ function Signup() {
                   setf3(true)
                 }} required />
                 <br />
+                <label htmlFor="">Employee Paid By : </label>
+                <input type="number" name="amountPaid" id="" onChange={(e) => {
+                  setAmountPaid(e.target.value)
+                  setf4(true)
+                }} required />
+                <br />
                 <button disabled={!flag} onClick={saveJobData}>Add</button></form>
             </div>
             }
+
             <br />
             <label htmlFor="">Email I'd</label><br /><br />
             <input type="email" name="email" id="" required /><br /><br />
@@ -391,17 +496,9 @@ function Signup() {
             <button type="submit" className="signup-btn">Signup</button>
           </form>
         </div>
-        <div className="upprQuery">
-        <div className="generateQuery">
-          <h3>If you didn't find required work!, then you can generate a query to us!</h3>
-            <input type="text" name="" id="" placeholder=' write required work name here which you did not find in the given list ' />
-            <button id='queryBtn'>Generate Query</button>
-        </div>
-        </div>
-        
       </div>}
     </div>
   )
-} 
+}
 
 export default Signup

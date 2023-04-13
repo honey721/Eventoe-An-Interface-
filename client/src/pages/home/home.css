@@ -138,6 +138,9 @@
 .endDate > input {
     width: 70px;
 }
+.amountPaid > input {
+    width: 70px;
+}
 .avail_work{
     margin-top: 10px;
 }
@@ -145,5 +148,5 @@
     margin-top: 40px;
     display: flex;
     justify-content: space-around;
-
 }
+

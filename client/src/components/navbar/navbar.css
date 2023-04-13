@@ -1,57 +1,37 @@
-.navbar{
-    height: 70px;
-    background-color: #003580;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .navContainer{
-    width: 100%;
-    margin: 20px;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: left;
-  }
-  .navContainer > .homeul{
-    display: flex;
-    font-size: larger;
-    list-style-type: none;
-    justify-content: space-evenly;
-    width: 991px;
-    height: 100%;
-    font-family: system-ui;
-  }
-  
-  .logo{
-    font-weight: 500;
-    font-size: xx-large;
-    margin-right: 80px;
-  }
+.navbar {
+  height: 70px;
+  background-color: #003580;
+  display: flex;
+  justify-content: center;
+}
 
-  .profileul{
-    width: inherit;
-    display: flex;
-    justify-content: end;
-    list-style: none;
-    font-size: larger;
-    justify-content: flex-start;
-    margin-left: 140px;
-    height: 100%;
-  }
+.navContainer {
+  width: 100%;
+  margin: 20px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
 
-  .logout > #logoutbtn{
-    background-color: red;
-    padding: 3px 6px 3px 6px;
-    border-radius: 8px;
-    font-size: large;
-    list-style-type: none;
-    height: 78%;
-  }
-  
-  .logout{
-    width: inherit;
-    display: flex;
-    justify-content: end;
-    height: 100%;
-  }
+.homeul {
+  display: flex;
+  width: 95%;
+  list-style-type: none;
+}
+
+.homeul>li {
+  margin-right: 65px;
+  font-size: x-large;
+  margin-bottom: 0px;
+  word-spacing: 0px;
+}
+
+#logout{
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  padding: 5px;
+  font-size: larger;
+  border: solid 1px black;
+  background-color: red;
+}

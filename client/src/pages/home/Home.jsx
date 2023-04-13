@@ -1,3 +1,6 @@
+// lines edited - 99 to 102 , 88
+// lines commented - 31 , 
+
 
 import React, { useState, useEffect } from 'react'
 import "./home.css";
@@ -25,7 +28,7 @@ function Home() {
   var [flag, setFlag] = useState(true);
   var [articleName, setArticleName] = useState('');
   var location = useLocation();
-  const data = location.state.formData;
+  // const data = location.state.formData;
   // console.log("formData : ", data, location.state.userValue)
 
   const page = "home";
@@ -81,8 +84,9 @@ function Home() {
     console.log("jobs bro ",ele.jobs)});
 
   return (
-    <div>
-      <Navbar page={page} name={location.state.userValue} userDetail={data}/>
+    <div >
+      {/* <Navbar page={page} name={location.state.userValue} userDetail={data}/> */}
+      <Navbar/>
       <div className="container">
         <div className="sec1"> 
           {/* <div className="profile-pic">
@@ -93,10 +97,10 @@ function Home() {
             <hr />
           </div>
           <div className="detail">
-            <h2>{data.username}</h2>
-            <span><FontAwesomeIcon icon={faPhone} /> {data.phone}</span>
-            <span><FontAwesomeIcon icon={faMailReplyAll} />  {data.email}</span>
-            <span><FontAwesomeIcon icon={faHome} />  {data.address}</span>
+            <h2>{sessionStorage.getItem("username")}</h2>
+            <span><FontAwesomeIcon icon={faPhone} /> {sessionStorage.getItem("phone")} </span>
+            <span><FontAwesomeIcon icon={faMailReplyAll} />  {sessionStorage.getItem("email")}</span>
+            <span><FontAwesomeIcon icon={faHome} />  {sessionStorage.getItem("address")}</span>
             {/* <img src="img/email.png" alt="" /> */}
           </div>
         </div>
@@ -134,16 +138,20 @@ function Home() {
                         job.workName === articleName && 
                         <div className="aboutJob">
                         <div className="days">
-                          <label htmlFor="">For Days</label>
+                          <label htmlFor="">For Days </label>
                           <input type="number" name="" value={job.days} id="" />
                         </div>
                         <div className="startDate">
-                          <label htmlFor="">Start-Date</label>
+                          <label htmlFor="">Start-Date </label>
                           <input type="text" name="" value={job.startDate} id="" />
                         </div>
                         <div className="endDate">
-                          <label htmlFor="">End-Date</label>
+                          <label htmlFor="">End-Date </label>
                           <input type="text" name="" value={job.endDate} id="" />
+                        </div>
+                        <div className="amountPaid">
+                          <label htmlFor="">Paid by </label>
+                          <input type="text" name="" value={job.amountPaid} id="" />
                         </div>
                       </div>
                       

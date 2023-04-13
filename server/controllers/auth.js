@@ -89,3 +89,16 @@ export const comlogin = async (req, res, next) => {
   }
 }
 
+export const updateCompany = async (req, res, next) => {
+  console.log("inside update company!")
+  try {
+    const com = await company.updateOne(
+      { email: req.body.email},
+      { $set: { work : req.body.work} }
+    )
+    res.status(200).json(com);
+    
+  } catch (err) {
+    next(err);
+  }
+}
